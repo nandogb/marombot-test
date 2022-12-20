@@ -19,14 +19,15 @@ client.once(Events.ClientReady, c => {
 	console.log(`Ready! Logged in as ${c.user.tag}`);
 });
 
+client.on('message', msg => {
+	if (msg.content === 'ping') {
+		msg.reply('pong');
+	}
+});
+
 client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
-	client.on('message', msg => {
-		if (msg.content === 'ping') {
-			msg.reply('pong');
-		}
-	});
 
 	const command = client.commands.get(interaction.commandName);
 
